@@ -52,7 +52,7 @@ namespace CVVTuber.VRM
                 float eyeOpen = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2.0f;
                 //Debug.Log("eyeOpen " + eyeOpen);
 
-                if (eyeOpen >= 0.4f)
+                if (eyeOpen >= 0.5f)
                 {
                     eyeOpen = 1.0f;
                 }
@@ -62,7 +62,7 @@ namespace CVVTuber.VRM
                 }
                 EyeParam = Mathf.Lerp(EyeParam, 1.0f - eyeOpen, eyeLeapT);
 
-                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Blink), EyeParam);
+                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy), EyeParam);
             }
 
             if (enableMouth)
