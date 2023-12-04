@@ -19,8 +19,6 @@ namespace CVVTuberExample
         {
             sp_human_face_68,
             sp_human_face_68_for_mobile,
-            sp_human_face_17,
-            sp_human_face_17_for_mobile
         }
 
         public Dropdown dlibShapePredictorNameDropdown;
@@ -38,7 +36,7 @@ namespace CVVTuberExample
         // Use this for initialization
         void Start()
         {
-            exampleTitle.text = "CV VTuber Example " + Application.version;
+            exampleTitle.text = "Avatar System For English Conversation";
 
             versionInfo.text = Core.NATIVE_LIBRARY_NAME + " " + OpenCVForUnity.UnityUtils.Utils.getVersion() + " (" + Core.VERSION + ")";
             versionInfo.text += " / dlibfacelandmarkdetector" + " " + DlibFaceLandmarkDetector.UnityUtils.Utils.getVersion();
@@ -80,43 +78,6 @@ namespace CVVTuberExample
         void Update()
         {
 
-        }
-
-        public void OnScrollRectValueChanged()
-        {
-            verticalNormalizedPosition = scrollRect.verticalNormalizedPosition;
-        }
-
-
-        public void OnShowOpenCVLicenseButtonClick()
-        {
-            SceneManager.LoadScene("ShowOpenCVLicense");
-        }
-
-        public void OnWebCamTextureCVVTuberExampleButtonClick()
-        {
-            SceneManager.LoadScene("WebCamTextureCVVTuberExample");
-        }
-
-        public void OnVideoCaptureCVVTuberExampleButtonClick()
-        {
-            SceneManager.LoadScene("VideoCaptureCVVTuberExample");
-        }
-
-
-        public void OnShowUnityChanLicenseButtonClick()
-        {
-            SceneManager.LoadScene("ShowUnityChanLicense");
-        }
-
-        public void OnUnityChanCVVTuberExampleButtonClick()
-        {
-            SceneManager.LoadScene("UnityChanCVVTuberExample");
-        }
-
-        public void OnLive2DCubism4CVVTuberExampleButtonClick()
-        {
-            SceneManager.LoadScene("Live2DCubism4CVVTuberExample");
         }
 
         public void OnVRMCVVTuberExampleButtonClick()
