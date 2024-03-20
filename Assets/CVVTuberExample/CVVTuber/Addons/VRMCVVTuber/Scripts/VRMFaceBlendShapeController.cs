@@ -52,7 +52,7 @@ namespace CVVTuber.VRM
                 float eyeOpen = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2.0f;
                 //Debug.Log("eyeOpen " + eyeOpen);
 
-                if (eyeOpen >= 0.5f)
+                if (eyeOpen >= 0.2f)
                 {
                     eyeOpen = 1.0f;
                 }
