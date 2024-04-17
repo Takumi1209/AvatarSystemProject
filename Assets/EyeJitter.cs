@@ -21,6 +21,7 @@ public class EyeJitter : MonoBehaviour
     {
     }
 
+    [System.Obsolete]
     void LateUpdate()
     {
         timer -= Time.deltaTime;

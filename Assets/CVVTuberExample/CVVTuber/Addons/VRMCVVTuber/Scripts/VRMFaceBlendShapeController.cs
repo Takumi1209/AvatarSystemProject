@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRM;
 
+
 namespace CVVTuber.VRM
 {
     public class VRMFaceBlendShapeController : FaceAnimationController
@@ -52,7 +53,7 @@ namespace CVVTuber.VRM
                 float eyeOpen = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2.0f;
                 //Debug.Log("eyeOpen " + eyeOpen);
 
-                if (eyeOpen >= 0.2f)
+                if (eyeOpen >= 0.1f)
                 {
                     eyeOpen = 1.0f;
                 }
@@ -62,7 +63,7 @@ namespace CVVTuber.VRM
                 }
                 EyeParam = Mathf.Lerp(EyeParam, 1.0f - eyeOpen, eyeLeapT);
 
-                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy), EyeParam);
+                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Blink), EyeParam);
             }
 
             if (enableMouth)
@@ -70,7 +71,7 @@ namespace CVVTuber.VRM
                 float mouthOpen = GetMouthOpenYRatio(points);
                 //Debug.Log("mouthOpen " + mouthOpen);
 
-                if (mouthOpen >= 0.7f)
+                if (mouthOpen >= 0.6f)
                 {
                     mouthOpen = 1.0f;
                 }
@@ -85,27 +86,27 @@ namespace CVVTuber.VRM
                 MouthOpenParam = Mathf.Lerp(MouthOpenParam, mouthOpen, mouthLeapT);
 
                 blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.A), MouthOpenParam);
-                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.O), MouthOpenParam * 0.7f);
+                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.O), MouthOpenParam * 0.55f);
 
 
                 float mouthSize = GetMouthOpenXRatio(points);
                 //Debug.Log("mouthSize " + mouthSize);
 
-                if (mouthSize >= 0.8f)
+                if (mouthSize >= 0.4f)
                 {
                     mouthSize = 1.0f;
                 }
-                else if (mouthSize >= 0.6f)
-                {
-                    mouthSize = 0.5f;
-                }
+               // else if (mouthSize >= 0.4f)
+               // {
+               //     mouthSize = 0.5f;
+               // }
                 else
                 {
                     mouthSize = 0.0f;
                 }
                 MouthSizeParam = Mathf.Lerp(MouthSizeParam, mouthSize, mouthLeapT);
 
-                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.I), MouthSizeParam);
+                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy), MouthSizeParam);
             }
         }
 

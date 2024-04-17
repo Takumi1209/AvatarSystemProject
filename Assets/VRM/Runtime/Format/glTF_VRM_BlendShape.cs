@@ -57,6 +57,11 @@ namespace VRM
 
         Blink_L,
         Blink_R,
+
+        Star,
+        Hachume,
+        Hauu,
+        Tear,
     }
 
     [Serializable]
