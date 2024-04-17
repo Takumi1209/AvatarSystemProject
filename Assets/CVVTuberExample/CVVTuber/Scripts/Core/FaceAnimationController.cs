@@ -43,13 +43,13 @@ namespace CVVTuber
         public float MouthSizeParam = 0;
 
         [Range(0, 1)]
-        public float browLeapT = 0.6f;
+        public float browLeapT = 0.4f;
 
         [Range(0, 1)]
-        public float eyeLeapT = 0.6f;
+        public float eyeLeapT = 0.4f;
 
         [Range(0, 1)]
-        public float mouthLeapT = 0.6f;
+        public float mouthLeapT = 0.3f;
 
         protected List<Vector2> oldPoints;
 

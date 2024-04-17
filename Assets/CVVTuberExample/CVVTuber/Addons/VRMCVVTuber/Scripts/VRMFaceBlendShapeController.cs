@@ -48,6 +48,25 @@ namespace CVVTuber.VRM
 
         protected override void UpdateFaceAnimation(List<Vector2> points)
         {
+            if (enableBrow)
+            {
+                float browHeight = (GetLeftEyebrowUPRatio(points) + GetRightEyebrowUPRatio(points)) / 2.0f;
+                //Debug.Log("browHeight " + browHeight);
+
+                if (browHeight >= 0.87f)
+                {
+                    browHeight = 1.0f;
+                }
+                else
+                {
+                    browHeight = 0.0f;
+                }
+                BrowParam = Mathf.Lerp(BrowParam, browHeight, browLeapT);
+
+                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Star), BrowParam);
+            }
+            
+            
             if (enableEye)
             {
                 float eyeOpen = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2.0f;
@@ -92,7 +111,7 @@ namespace CVVTuber.VRM
                 float mouthSize = GetMouthOpenXRatio(points);
                 //Debug.Log("mouthSize " + mouthSize);
 
-                if (mouthSize >= 0.4f)
+                if (mouthSize >= 0.3f)
                 {
                     mouthSize = 1.0f;
                 }
