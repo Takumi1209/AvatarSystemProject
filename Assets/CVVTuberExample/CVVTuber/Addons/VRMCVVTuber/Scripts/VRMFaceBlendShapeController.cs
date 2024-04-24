@@ -53,9 +53,9 @@ namespace CVVTuber.VRM
             if (enableNoseAndJaw)
             {
                 float jawangle = angleTilt(points);
-                if (jawangle > 105 || jawangle < 77.5)
-                {
-                    Debug.Log("jawangle " + jawangle);
+                if (jawangle > 107.5 || jawangle < 77.5)
+                { 
+
                     blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), 1.0f);
 
                 }

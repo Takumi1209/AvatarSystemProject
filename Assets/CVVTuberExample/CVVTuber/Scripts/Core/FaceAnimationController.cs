@@ -188,10 +188,10 @@ namespace CVVTuber
         protected virtual float angleTilt(List<Vector2> points)
         {
            float angle = (float)(Math.Atan2(points[8].y - points[30].y, points[8].x - points[30].x) * 180 / Math.PI);
-           Debug.Log("angleTilt " + angle);
-            return angle;
+
+           return angle;
 
         }
-        
+
     }
 }
