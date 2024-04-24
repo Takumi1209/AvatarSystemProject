@@ -1,5 +1,9 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 namespace CVVTuber
 {
@@ -29,6 +33,8 @@ namespace CVVTuber
         public bool enableEye;
 
         public bool enableMouth;
+
+        public bool enableNoseAndJaw;
 
         [Range(0, 1)]
         public float BrowParam = 0;
@@ -69,6 +75,9 @@ namespace CVVTuber
 
         protected float distanceBetweenEyes;
 
+        protected float eyeTilt;
+  
+
 
         #region CVVTuberProcess
 
@@ -99,7 +108,7 @@ namespace CVVTuber
                 }
             }
         }
-
+        
         #endregion
 
 
@@ -115,7 +124,7 @@ namespace CVVTuber
                 distanceOfMouthHeight = new Vector2(points[51].x - points[57].x, points[51].y - points[57].y).sqrMagnitude;
                 distanceOfMouthWidth = new Vector2(points[48].x - points[54].x, points[48].y - points[54].y).sqrMagnitude;
                 distanceBetweenEyes = new Vector2(points[39].x - points[42].x, points[39].y - points[42].y).sqrMagnitude;
-
+               
             }
             else if (points.Count == 17)
             {
@@ -127,6 +136,7 @@ namespace CVVTuber
                 distanceOfMouthHeight = new Vector2(points[14].x - points[16].x, points[14].y - points[16].y).sqrMagnitude;
                 distanceOfMouthWidth = new Vector2(points[13].x - points[15].x, points[13].y - points[15].y).sqrMagnitude;
                 distanceBetweenEyes = new Vector2(points[3].x - points[4].x, points[3].y - points[4].y).sqrMagnitude;
+               
             }
         }
 
@@ -145,6 +155,7 @@ namespace CVVTuber
             //Debug.Log ("raw RightEyeOpen ratio: " + ratio);
             return Mathf.InverseLerp(0.003f, 0.009f, ratio);
         }
+
 
         protected virtual float GetLeftEyebrowUPRatio(List<Vector2> points)
         {
@@ -173,5 +184,14 @@ namespace CVVTuber
             //Debug.Log ("raw MouthOpenX ratio: " + ratio);
             return Mathf.InverseLerp(1.8f, 2.0f, ratio);
         }
+
+        protected virtual float angleTilt(List<Vector2> points)
+        {
+           float angle = (float)(Math.Atan2(points[8].y - points[30].y, points[8].x - points[30].x) * 180 / Math.PI);
+           Debug.Log("angleTilt " + angle);
+            return angle;
+
+        }
+        
     }
 }

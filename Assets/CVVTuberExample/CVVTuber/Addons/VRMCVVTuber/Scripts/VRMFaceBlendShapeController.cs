@@ -46,16 +46,31 @@ namespace CVVTuber.VRM
             base.UpdateValue();
         }
 
+
         protected override void UpdateFaceAnimation(List<Vector2> points)
         {
+
+            if (enableNoseAndJaw)
+            {
+                float jawangle = angleTilt(points);
+                if (jawangle > 105 || jawangle < 77.5)
+                {
+                    Debug.Log("jawangle " + jawangle);
+                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), 1.0f);
+
+                }
+
+            }
+
             if (enableBrow)
             {
                 float browHeight = (GetLeftEyebrowUPRatio(points) + GetRightEyebrowUPRatio(points)) / 2.0f;
                 //Debug.Log("browHeight " + browHeight);
 
-                if (browHeight >= 0.87f)
+                if (browHeight >= 0.86f)
                 {
                     browHeight = 1.0f;
+
                 }
                 else
                 {
@@ -71,6 +86,7 @@ namespace CVVTuber.VRM
             {
                 float eyeOpen = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2.0f;
                 //Debug.Log("eyeOpen " + eyeOpen);
+               
 
                 if (eyeOpen >= 0.1f)
                 {
