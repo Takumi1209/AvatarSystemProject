@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 using VRM;
 
@@ -49,6 +51,22 @@ namespace CVVTuber.VRM
 
         protected override void UpdateFaceAnimation(List<Vector2> points)
         {
+            if (enableNod)
+            {
+                float nod = NodDitect(points);
+                Debug.Log("nod " + nod);
+                if (nod < 89.5f)
+                { 
+                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), 1.0f);
+
+
+                }
+                else
+                {
+                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), 0.0f);
+                }
+                
+            }
 
             if (enableNoseAndJaw)
             {
@@ -65,7 +83,7 @@ namespace CVVTuber.VRM
             if (enableBrow)
             {
                 float browHeight = (GetLeftEyebrowUPRatio(points) + GetRightEyebrowUPRatio(points)) / 2.0f;
-                //Debug.Log("browHeight " + browHeight);
+                // Debug.Log("browHeight " + browHeight);
 
                 if (browHeight >= 0.86f)
                 {
@@ -79,6 +97,7 @@ namespace CVVTuber.VRM
                 BrowParam = Mathf.Lerp(BrowParam, browHeight, browLeapT);
 
                 blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Star), BrowParam);
+
             }
             
             
@@ -106,7 +125,7 @@ namespace CVVTuber.VRM
                 float mouthOpen = GetMouthOpenYRatio(points);
                 //Debug.Log("mouthOpen " + mouthOpen);
 
-                if (mouthOpen >= 0.6f)
+                if (mouthOpen >= 0.65f)
                 {
                     mouthOpen = 1.0f;
                 }

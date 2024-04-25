@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.WSA;
+
 
 namespace CVVTuber
 {
@@ -36,6 +38,11 @@ namespace CVVTuber
 
         public bool enableNoseAndJaw;
 
+        public bool enableNod;
+
+        [Range(0, 1)]
+        public float NodParam = 0;
+
         [Range(0, 1)]
         public float BrowParam = 0;
 
@@ -58,6 +65,8 @@ namespace CVVTuber
         public float mouthLeapT = 0.3f;
 
         protected List<Vector2> oldPoints;
+
+        protected List<float> nodList = new List<float>();
 
         protected float distanceOfLeftEyeHeight;
 
@@ -108,6 +117,7 @@ namespace CVVTuber
                 }
             }
         }
+
         
         #endregion
 
@@ -192,6 +202,24 @@ namespace CVVTuber
            return angle;
 
         }
+
+        protected virtual float NodDitect(List<Vector2> points)
+        {
+           float nod = (float)(Math.Atan(points[44].y - points[29].y) - Math.Atan(points[35].y - points[29].y) * 180 / Math.PI);
+           /*float averageNod = 0;
+            nodList.Add(nod);
+            if (nodList.Count > 10)
+            {
+                nodList.RemoveAt(0);
+            }
+            foreach (float n in nodList)
+            {
+                averageNod += n;
+            }
+            averageNod = averageNod / nodList.Count; */
+            return Math.Abs(nod);
+        }
+
 
     }
 }
