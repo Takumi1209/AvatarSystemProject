@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.WSA;
+//using UnityEngine.WSA;
 
 
 namespace CVVTuber
@@ -85,7 +85,7 @@ namespace CVVTuber
         protected float distanceBetweenEyes;
 
         protected float eyeTilt;
-  
+
 
 
         #region CVVTuberProcess
@@ -118,7 +118,7 @@ namespace CVVTuber
             }
         }
 
-        
+
         #endregion
 
 
@@ -134,7 +134,7 @@ namespace CVVTuber
                 distanceOfMouthHeight = new Vector2(points[51].x - points[57].x, points[51].y - points[57].y).sqrMagnitude;
                 distanceOfMouthWidth = new Vector2(points[48].x - points[54].x, points[48].y - points[54].y).sqrMagnitude;
                 distanceBetweenEyes = new Vector2(points[39].x - points[42].x, points[39].y - points[42].y).sqrMagnitude;
-               
+
             }
             else if (points.Count == 17)
             {
@@ -146,7 +146,7 @@ namespace CVVTuber
                 distanceOfMouthHeight = new Vector2(points[14].x - points[16].x, points[14].y - points[16].y).sqrMagnitude;
                 distanceOfMouthWidth = new Vector2(points[13].x - points[15].x, points[13].y - points[15].y).sqrMagnitude;
                 distanceBetweenEyes = new Vector2(points[3].x - points[4].x, points[3].y - points[4].y).sqrMagnitude;
-               
+
             }
         }
 
@@ -197,26 +197,26 @@ namespace CVVTuber
 
         protected virtual float angleTilt(List<Vector2> points)
         {
-           float angle = (float)(Math.Atan2(points[8].y - points[30].y, points[8].x - points[30].x) * 180 / Math.PI);
+            float angle = (float)(Math.Atan2(points[8].y - points[30].y, points[8].x - points[30].x) * 180 / Math.PI);
 
-           return angle;
+            return angle;
 
         }
 
         protected virtual float NodDitect(List<Vector2> points)
         {
-           float nod = (float)(Math.Atan(points[44].y - points[29].y) - Math.Atan(points[35].y - points[29].y) * 180 / Math.PI);
-           /*float averageNod = 0;
-            nodList.Add(nod);
-            if (nodList.Count > 10)
-            {
-                nodList.RemoveAt(0);
-            }
-            foreach (float n in nodList)
-            {
-                averageNod += n;
-            }
-            averageNod = averageNod / nodList.Count; */
+            float nod = (float)(Math.Atan(points[44].y - points[29].y) - Math.Atan(points[35].y - points[29].y) * 180 / Math.PI);
+            /*float averageNod = 0;
+             nodList.Add(nod);
+             if (nodList.Count > 10)
+             {
+                 nodList.RemoveAt(0);
+             }
+             foreach (float n in nodList)
+             {
+                 averageNod += n;
+             }
+             averageNod = averageNod / nodList.Count; */
             return Math.Abs(nod);
         }
 

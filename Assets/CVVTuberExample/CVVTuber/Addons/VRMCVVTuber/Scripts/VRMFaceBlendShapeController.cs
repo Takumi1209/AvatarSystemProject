@@ -50,28 +50,12 @@ namespace CVVTuber.VRM
 
 
         protected override void UpdateFaceAnimation(List<Vector2> points)
-        {
-            if (enableNod)
-            {
-                float nod = NodDitect(points);
-                Debug.Log("nod " + nod);
-                if (nod < 89.5f)
-                { 
-                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), 1.0f);
-
-
-                }
-                else
-                {
-                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), 0.0f);
-                }
-                
-            }
+        { 
 
             if (enableNoseAndJaw)
             {
                 float jawangle = angleTilt(points);
-                if (jawangle > 107.5 || jawangle < 77.5)
+                if (jawangle > 115.0f || jawangle < 65.0f)
                 { 
 
                     blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), 1.0f);
@@ -85,7 +69,7 @@ namespace CVVTuber.VRM
                 float browHeight = (GetLeftEyebrowUPRatio(points) + GetRightEyebrowUPRatio(points)) / 2.0f;
                 // Debug.Log("browHeight " + browHeight);
 
-                if (browHeight >= 0.86f)
+                if (browHeight >= 0.85f)
                 {
                     browHeight = 1.0f;
 
@@ -107,7 +91,7 @@ namespace CVVTuber.VRM
                 //Debug.Log("eyeOpen " + eyeOpen);
                
 
-                if (eyeOpen >= 0.1f)
+                if (eyeOpen >= 0.2f)
                 {
                     eyeOpen = 1.0f;
                 }
@@ -162,6 +146,17 @@ namespace CVVTuber.VRM
 
                 blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy), MouthSizeParam);
             }
+
+         //   if (enableNod)
+         //   {
+         //       float nod = NodDitect(points);
+         //     Debug.Log("nod " + nod);
+         //       if (nod < 89.5f)
+         //       {
+         //           blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), 1.0f);
+         //       }
+         //   }
+
         }
 
         #endregion
