@@ -56,7 +56,7 @@ namespace CVVTuber.VRM
             {
                 float jawangle = angleTilt(points);
                 if (jawangle > 115.0f || jawangle < 65.0f)
-                { 
+                {
 
                     blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), 1.0f);
 
@@ -145,6 +145,14 @@ namespace CVVTuber.VRM
                 MouthSizeParam = Mathf.Lerp(MouthSizeParam, mouthSize, mouthLeapT);
 
                 blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy), MouthSizeParam);
+
+                float mouthRatio = (GetMouthOpenXRatio(points) + GetMouthOpenYRatio(points)) / 2;
+                // Debug.Log("mouthWidth " + mouthRatio);
+                float EyeRatio = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2;
+                // Debug.Log("EyeRatio " + EyeRatio);
+               
+                
+                
             }
 
          //   if (enableNod)

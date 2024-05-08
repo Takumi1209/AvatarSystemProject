@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VRM;
 //using UnityEngine.WSA;
 
 
@@ -88,6 +89,7 @@ namespace CVVTuber
 
 
 
+
         #region CVVTuberProcess
 
         public override void Setup()
@@ -111,10 +113,12 @@ namespace CVVTuber
             }
             else
             {
+              
                 if (oldPoints != null)
                 {
                     UpdateFaceAnimation(oldPoints);
                 }
+              
             }
         }
 
@@ -184,14 +188,14 @@ namespace CVVTuber
         protected virtual float GetMouthOpenYRatio(List<Vector2> points)
         {
             float ratio = distanceOfMouthHeight / distanceOfNoseHeight;
-            //Debug.Log ("raw MouthOpenY ratio: " + ratio);
+            // Debug.Log ("raw MouthOpenY ratio: " + ratio);
             return Mathf.InverseLerp(0.06f, 0.6f, ratio);
         }
 
         protected virtual float GetMouthOpenXRatio(List<Vector2> points)
         {
             float ratio = distanceOfMouthWidth / distanceBetweenEyes;
-            //Debug.Log ("raw MouthOpenX ratio: " + ratio);
+            // Debug.Log ("raw MouthOpenX ratio: " + ratio);
             return Mathf.InverseLerp(1.8f, 2.0f, ratio);
         }
 
