@@ -140,10 +140,12 @@ namespace VRM
         }
 
         [Obsolete("Use BlendShapeKey.CreateFromPreset")]
+     
         public static void AccumulateValue(this VRMBlendShapeProxy proxy, BlendShapePreset key, float value)
         {
             proxy.AccumulateValue(BlendShapeKey.CreateFromPreset(key), value);
         }
+    
 
         [Obsolete("Use ImmediatelySetValue")]
         public static void SetValue(this VRMBlendShapeProxy proxy, String key, float value)
