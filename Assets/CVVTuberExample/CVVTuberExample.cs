@@ -36,7 +36,7 @@ namespace CVVTuberExample
         // Use this for initialization
         void Start()
         {
-            exampleTitle.text = "Avatar System For English Conversation";
+            exampleTitle.text = "Avatar System For Zoom Fatigue";
 
             versionInfo.text = Core.NATIVE_LIBRARY_NAME + " " + OpenCVForUnity.UnityUtils.Utils.getVersion() + " (" + Core.VERSION + ")";
             versionInfo.text += " / dlibfacelandmarkdetector" + " " + DlibFaceLandmarkDetector.UnityUtils.Utils.getVersion();
@@ -71,7 +71,8 @@ namespace CVVTuberExample
 
             scrollRect.verticalNormalizedPosition = verticalNormalizedPosition;
 
-            dlibShapePredictorNameDropdown.value = (int)dlibShapePredictorName;
+            // dlibShapePredictorNameDropdown.value = (int)dlibShapePredictorName;
+
         }
 
         // Update is called once per frame

@@ -1,3 +1,6 @@
+using CVVTuber;
+using CVVTuber.VRM;
+using DlibFaceLandmarkDetector;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -13,6 +16,7 @@ namespace AddonScripts{
 
         public float BlinkParam;
         public float MIniBlinkParam = 15f;
+        public float blinkSpeed = 0.5f;
         [Range(0, 1)]
         public float eyeLeapT = 0.4f;
 
@@ -23,6 +27,10 @@ namespace AddonScripts{
         public float BeforeYaw;
         public float BeforePitch;
 
+        private Transform HeadBone;
+
+        private Animator anim = null;
+
       
         // Start is called before the first frame update
         void Start()
@@ -32,6 +40,9 @@ namespace AddonScripts{
             {
                 VRMLookAtHead = GetComponent<VRMLookAtHead>();
             }
+
+            anim = GetComponent<Animator>();
+            anim.SetBool("Bool", true);
 
         }
        
@@ -44,32 +55,31 @@ namespace AddonScripts{
             timeElapsed += Time.deltaTime;
             float Yaw = VRMLookAtHead.Yaw;
             float Pitch = VRMLookAtHead.Pitch;
+            
+            
          
 
             // Debug.Log("Yaw: " + Math.Abs(Yaw - BeforeYaw) + " Pitch: " + Math.Abs(Pitch - BeforePitch));
-            
+
             if (timeElapsed >= timeOut)
             {
                 if (Math.Abs(Yaw - BeforeYaw) < 0.05f && Math.Abs(Pitch - BeforePitch) < 0.05f)
                 {
-                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Neutral), 1.0f);
+                    
                     float randomin = UnityEngine.Random.Range(0.0f, 1.0f);
                     if(randomin < 0.6f)
                     {
                         //ƒ‰ƒ“ƒ_ƒ€‚É–Ú‚ð•Â‚¶‚é
                         BlinkParam = Mathf.Lerp(0.9f, 1.0f, 0.2f);
                         blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Blink), BlinkParam);
-                        Debug.Log("Blink");
-
                     }
-                    //yaw‚Æpitch‚ðˆê’è‚Ì”ÍˆÍ“à‚Åƒ‰ƒ“ƒ_ƒ€‚É“®‚©‚·
-                    float randomYaw = 10 * UnityEngine.Random.Range(-1.0f, 1.0f);
-                    float randomPitch = 10 * UnityEngine.Random.Range(0.8f, 1.2f);
-                    Yaw = randomYaw;
-                    Pitch = randomPitch;
-                    VRMLookAtHead.RaiseYawPitchChanged(randomYaw, randomPitch);
-                    
+                    anim.SetBool("Bool", false);
 
+
+                }
+                else
+                {
+                    anim.SetBool("Bool", true);
                 }
                 BeforeYaw = Yaw;
                 BeforePitch = Pitch;

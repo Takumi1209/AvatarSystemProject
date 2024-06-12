@@ -3,6 +3,7 @@ using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
 using VRM;
+using UnityEngine.UI;
 
 
 namespace CVVTuber.VRM
@@ -48,6 +49,9 @@ namespace CVVTuber.VRM
             base.UpdateValue();
         }
 
+        public float browHightVal = 0.85f;
+ 
+
 
         protected override void UpdateFaceAnimation(List<Vector2> points)
         { 
@@ -69,7 +73,7 @@ namespace CVVTuber.VRM
                 float browHeight = (GetLeftEyebrowUPRatio(points) + GetRightEyebrowUPRatio(points)) / 2.0f;
                 // Debug.Log("browHeight " + browHeight);
 
-                if (browHeight >= 0.85f)
+                if (browHeight >= browHightVal)
                 {
                     browHeight = 1.0f;
 

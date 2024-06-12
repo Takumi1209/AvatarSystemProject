@@ -15,7 +15,7 @@ This software is released under the MIT License.
 namespace Mebiustos.BreathController {
     [CustomEditor(typeof(BreathController))]
     public class BreathControllerEditor : Editor {
-
+        [System.Obsolete]
         public override void OnInspectorGUI() {
             var breath = (BreathController)target;
             bool change = false;
