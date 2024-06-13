@@ -65,7 +65,7 @@ namespace AddonScripts{
             {
                 if (Math.Abs(Yaw - BeforeYaw) < 0.05f && Math.Abs(Pitch - BeforePitch) < 0.05f)
                 {
-                    
+                   
                     float randomin = UnityEngine.Random.Range(0.0f, 1.0f);
                     if(randomin < 0.6f)
                     {
@@ -74,7 +74,7 @@ namespace AddonScripts{
                         blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Blink), BlinkParam);
                     }
                     anim.SetBool("Bool", false);
-
+                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Neutral), 1.0f);
 
                 }
                 else
