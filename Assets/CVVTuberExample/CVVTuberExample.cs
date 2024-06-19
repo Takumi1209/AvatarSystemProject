@@ -1,4 +1,5 @@
 using OpenCVForUnity.CoreModule;
+using System.Windows.Forms;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,7 +14,8 @@ namespace CVVTuberExample
         public Text exampleTitle;
         public Text versionInfo;
         public ScrollRect scrollRect;
-        static float verticalNormalizedPosition = 1f;
+        //static float verticalNormalizedPosition = 1f;
+       
 
         public enum DlibShapePredictorNamePreset : int
         {
@@ -40,7 +42,7 @@ namespace CVVTuberExample
 
             versionInfo.text = Core.NATIVE_LIBRARY_NAME + " " + OpenCVForUnity.UnityUtils.Utils.getVersion() + " (" + Core.VERSION + ")";
             versionInfo.text += " / dlibfacelandmarkdetector" + " " + DlibFaceLandmarkDetector.UnityUtils.Utils.getVersion();
-            versionInfo.text += " / UnityEditor " + Application.unityVersion;
+            versionInfo.text += " / UnityEditor " + UnityEngine.Application.unityVersion;
             versionInfo.text += " / ";
 
 #if UNITY_EDITOR
@@ -69,7 +71,7 @@ namespace CVVTuberExample
             versionInfo.text += ".NET";
 #endif
 
-            scrollRect.verticalNormalizedPosition = verticalNormalizedPosition;
+           // scrollRect.verticalNormalizedPosition = verticalNormalizedPosition;
 
             // dlibShapePredictorNameDropdown.value = (int)dlibShapePredictorName;
 
@@ -90,6 +92,12 @@ namespace CVVTuberExample
         public void OnDlibShapePredictorNameDropdownValueChanged(int result)
         {
             dlibShapePredictorName = (DlibShapePredictorNamePreset)result;
+        }
+
+       
+        public void ChangeSpriteButtonClick()
+        {
+
         }
     }
 }
