@@ -42,7 +42,7 @@ namespace AddonScripts{
             }
 
             anim = GetComponent<Animator>();
-            anim.SetBool("Bool", true);
+            anim.SetInteger("RandomState", 0);
 
         }
        
@@ -73,13 +73,13 @@ namespace AddonScripts{
                         BlinkParam = Mathf.Lerp(0.9f, 1.0f, 0.2f);
                         blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Blink), BlinkParam);
                     }
-                    anim.SetBool("Bool", false);
-                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Neutral), 1.0f);
-
+                    // 1‚©‚ç3‚ÌŠÔ‚Åƒ‰ƒ“ƒ_ƒ€‚È®”‚ğæ“¾
+                    int RandomState = UnityEngine.Random.Range(1, 3);
+                    anim.SetInteger("RandomState", RandomState);
                 }
                 else
                 {
-                    anim.SetBool("Bool", true);
+                    anim.SetInteger("RandomState", 0);
                 }
                 BeforeYaw = Yaw;
                 BeforePitch = Pitch;
