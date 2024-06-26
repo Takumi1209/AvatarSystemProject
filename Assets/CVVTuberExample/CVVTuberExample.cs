@@ -95,9 +95,6 @@ namespace CVVTuberExample
         }
 
        
-        public void ChangeSpriteButtonClick()
-        {
-
-        }
+       
     }
 }

@@ -96,7 +96,8 @@ namespace CVVTuber
             if (Input.GetMouseButtonDown(0))
                 preMousePos = Input.mousePosition;
 
-            MouseDrag(Input.mousePosition);
+            MoveCamera();
+            // MouseDrag(Input.mousePosition);
         }
 
         protected virtual void MouseWheel(float delta)
@@ -114,6 +115,46 @@ namespace CVVTuber
             }
         }
 
+        // 十字キーでカメラ移動
+        protected virtual void MoveCamera()
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+               // 上方向にカメラ移動
+               this.transform.position += new Vector3(0, moveSpeed, 0);
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                this.transform.position += new Vector3(0, -moveSpeed, 0);
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                this.transform.position += new Vector3(moveSpeed, 0, 0);
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                this.transform.position += new Vector3(-moveSpeed, 0, 0);
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                // 上方向にカメラ移動
+                this.transform.position += new Vector3(0, moveSpeed, 0);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                this.transform.position += new Vector3(0, -moveSpeed, 0);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                this.transform.position += new Vector3(moveSpeed, 0, 0);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                this.transform.position += new Vector3(-moveSpeed, 0, 0);
+            }
+        }
+        /*
         protected virtual void MouseDrag(Vector3 mousePos)
         {
 
@@ -138,5 +179,6 @@ namespace CVVTuber
 
             preMousePos = mousePos;
         }
+        */
     }
 }
