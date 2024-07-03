@@ -1,7 +1,9 @@
 using CVVTuber;
 using CVVTuber.VRM;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace CVVTuberExample
 {
@@ -17,6 +19,7 @@ namespace CVVTuberExample
         /// </summary>
         public DlibFaceLandmarkGetter dlibFaceLandmarkGetter;
 
+        public FaceAnimationController faceAnimationController;
 
         // Use this for initialization
         void Start()
@@ -42,5 +45,18 @@ namespace CVVTuberExample
             webCamTextureMatSourceGetter.ChangeCamera();
         }
 
+        public Toggle Toggle;
+        public void OnChangeQuestionToggle()
+        {
+            
+            if (Toggle.isOn)
+            {
+                faceAnimationController.enableNoseAndJaw = true;
+            }
+            else
+            {
+                faceAnimationController.enableNoseAndJaw = false;
+            }
+        }
     }
 }

@@ -8,11 +8,12 @@ using UnityEngine.UI;
 using SFB;
 //using static UnityEditor.Timeline.TimelinePlaybackControls;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class VRMFileDialog : MonoBehaviour
 {
     public RawImage displayImage;
-    RuntimeGltfInstance instance;
+    RuntimeGltfInstance _instance;
     string defaultDirectory = "C:/Users/aise-member/Desktop/VRMAvatars";
 
     public void OpenFileDialog()
@@ -28,16 +29,16 @@ public class VRMFileDialog : MonoBehaviour
         if (paths.Length > 0)
         {
             string path = paths[0];
-            LoadVRM(path);
+            OpenFile(path);
         }
     }
 
-    async void LoadVRM(string path)
+    public async Task<GameObject> OpenFile(string path)
     {
         
-        this.instance = await VrmUtility.LoadAsync(defaultDirectory, new RuntimeOnlyAwaitCaller());
+        _instance = await VrmUtility.LoadAsync(defaultDirectory, new RuntimeOnlyAwaitCaller());
         // this.instance.EnableUpdateWhenOffscreen();
-        this.instance.ShowMeshes();
+        _instance.ShowMeshes();
 
         Texture2D thumbnail = null;
         if (thumbnail != null)
@@ -48,6 +49,8 @@ public class VRMFileDialog : MonoBehaviour
 
         // Optionally, load the next scene
         SceneManager.LoadScene("VRMCVVTuberExample");
+
+        return _instance.gameObject;
     }
 
     private void AdjustRawImageSize(RawImage rawImage, Texture2D texture)

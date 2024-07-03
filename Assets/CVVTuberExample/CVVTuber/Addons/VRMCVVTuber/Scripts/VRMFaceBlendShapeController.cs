@@ -50,8 +50,10 @@ namespace CVVTuber.VRM
         }
 
         public float browHightVal = 0.85f;
+        public float jawAngleVal = 65.0f;
+        public float smileVal = 0.3f;
  
-
+        
 
         protected override void UpdateFaceAnimation(List<Vector2> points)
         { 
@@ -59,7 +61,7 @@ namespace CVVTuber.VRM
             if (enableNoseAndJaw)
             {
                 float jawangle = angleTilt(points);
-                if (jawangle > 115.0f || jawangle < 65.0f)
+                if (jawangle > jawAngleVal + 50.0f || jawangle < jawAngleVal)
                 {
 
                     blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), 1.0f);
@@ -135,22 +137,27 @@ namespace CVVTuber.VRM
                 float mouthSize = GetMouthOpenXRatio(points);
                 //Debug.Log("mouthSize " + mouthSize);
 
-                if (mouthSize >= 0.3f)
+                if (mouthSize >= smileVal)
                 {
                     mouthSize = 1.0f;
                 }
-               // else if (mouthSize >= 0.4f)
-               // {
-               //     mouthSize = 0.5f;
-               // }
+                // else if (mouthSize >= 0.4f)
+                // {
+                //     mouthSize = 0.5f;
+                // }
                 else
                 {
                     mouthSize = 0.0f;
                 }
                 MouthSizeParam = Mathf.Lerp(MouthSizeParam, mouthSize, mouthLeapT);
-
-                blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy), MouthSizeParam);
-
+                if (enableSmile)
+                {
+                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy), MouthSizeParam);
+                }
+                else
+                {
+                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.I), MouthSizeParam);
+                }
                 float mouthRatio = (GetMouthOpenXRatio(points) + GetMouthOpenYRatio(points)) / 2;
                 // Debug.Log("mouthWidth " + mouthRatio);
                 float EyeRatio = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2;

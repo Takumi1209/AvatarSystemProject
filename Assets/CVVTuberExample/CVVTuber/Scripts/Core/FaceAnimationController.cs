@@ -41,6 +41,8 @@ namespace CVVTuber
 
         public bool enableNod;
 
+        public bool enableSmile;
+
         [Range(0, 1)]
         public float NodParam = 0;
 
