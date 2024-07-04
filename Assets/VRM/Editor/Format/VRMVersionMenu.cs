@@ -40,11 +40,11 @@ namespace UniGLTF
         /// <summary>
         /// VRM
         /// </summary>
-        const string VrmVersionPath = "Assets/VRM/Runtime/Format/VRMVersion.cs";
+        const string VrmVersionPath = "Assets/UniGLTF/Runtime/UniGLTF/PackageVersion.cs";
         const string VrmVersionTemplate = @"
-namespace VRM
+namespace UniGLTF
 {{
-    public static partial class VRMVersion
+    public static partial class PackageVersion
     {{
         public const int MAJOR = {0};
         public const int MINOR = {1};
@@ -74,13 +74,16 @@ namespace VRM
   ""version"": ""{1}"",
   ""displayName"": ""VRM Shaders"",
   ""description"": ""VRM Shaders"",
-  ""unity"": ""2019.4"",
+  ""unity"": ""2021.3"",
   ""keywords"": [
     ""vrm"",
     ""shader""
   ],
   ""author"": {{
     ""name"": ""VRM Consortium""
+  }},
+  ""dependencies"": {{
+    ""com.unity.modules.imageconversion"": ""1.0.0""
   }}
 }}
 "),
@@ -90,7 +93,7 @@ namespace VRM
   ""version"": ""{1}"",
   ""displayName"": ""VRM"",
   ""description"": ""VRM importer"",
-  ""unity"": ""2019.4"",
+  ""unity"": ""2021.3"",
   ""keywords"": [
     ""vrm"",
     ""importer"",
@@ -102,7 +105,8 @@ namespace VRM
   }},
   ""dependencies"": {{
     ""com.vrmc.vrmshaders"": ""{1}"",
-    ""com.vrmc.gltf"": ""{0}""
+    ""com.vrmc.gltf"": ""{0}"",
+    ""com.unity.ugui"": ""1.0.0""
   }},
   ""samples"": [
     {{
@@ -133,9 +137,9 @@ namespace VRM
 @"{{
   ""name"": ""com.vrmc.vrm"",
   ""version"": ""{1}"",
-  ""displayName"": ""VRM-1.0β"",
-  ""description"": ""VRM-1.0β importer"",
-  ""unity"": ""2019.4"",
+  ""displayName"": ""VRM-1.0"",
+  ""description"": ""VRM-1.0 importer"",
+  ""unity"": ""2021.3"",
   ""keywords"": [
     ""vrm"",
     ""importer"",
@@ -172,7 +176,7 @@ namespace VRM
   ""version"": ""{0}"",
   ""displayName"": ""UniGLTF"",
   ""description"": ""GLTF importer and exporter"",
-  ""unity"": ""2019.4"",
+  ""unity"": ""2021.3"",
   ""keywords"": [
     ""gltf""
   ],
@@ -180,8 +184,16 @@ namespace VRM
     ""name"": ""VRM Consortium""
   }},
   ""dependencies"": {{
-    ""com.vrmc.vrmshaders"": ""{1}""
-  }}
+    ""com.vrmc.vrmshaders"": ""{1}"",
+    ""com.unity.modules.animation"": ""1.0.0""
+  }},
+  ""samples"": [
+    {{
+      ""displayName"": ""GltfViewer"",
+      ""description"": ""UniGLTF runtime loader sample"",
+      ""path"": ""Samples~/GltfViewer""
+    }}
+  ]
 }}");
 
         [SerializeField]
@@ -239,7 +251,7 @@ namespace VRM
         void OnGUI()
         {
             GUILayout.Label("VRM");
-            GUILayout.Label($"Current version: {VRMVersion.VERSION}");
+            GUILayout.Label($"Current version: {PackageVersion.VERSION}");
             m_vrmVersion = EditorGUILayout.TextField("Major.Minor.Patch", m_vrmVersion);
             GUILayout.Space(30);
 
@@ -312,7 +324,7 @@ namespace VRM
         public static void ShowVersionDialog()
         {
             var window = ScriptableObject.CreateInstance<VRMVersionMenu>();
-            window.m_vrmVersion = VRMVersion.VERSION;
+            window.m_vrmVersion = PackageVersion.VERSION;
             // window.m_uniGltfVersion = UniGLTFVersion.VERSION;
             window.ShowUtility();
         }

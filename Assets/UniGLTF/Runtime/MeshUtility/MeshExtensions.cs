@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Linq;
+using VRMShaders;
 
 
 namespace UniGLTF.MeshUtility
@@ -53,11 +54,11 @@ namespace UniGLTF.MeshUtility
             {
                 var vertices = src.vertices;
                 var normals = src.normals;
-#if VRM_NORMALIZE_BLENDSHAPE_TANGENT
-                var tangents = src.tangents.Select(x => (Vector3)x).ToArray();
-#else
                 Vector3[] tangents = null;
-#endif
+                if (Symbols.VRM_NORMALIZE_BLENDSHAPE_TANGENT)
+                {
+                    tangents = src.tangents.Select(x => (Vector3)x).ToArray();
+                }
 
                 for (int i = 0; i < src.blendShapeCount; ++i)
                 {
@@ -75,9 +76,19 @@ namespace UniGLTF.MeshUtility
             return dst;
         }
 
-        public static void ApplyRotationAndScale(this Mesh src, Matrix4x4 m)
+        public static void ApplyRotationAndScale(this Mesh src, Matrix4x4 m, bool removeTranslation = true)
         {
-            m.SetColumn(3, new Vector4(0, 0, 0, 1)); // remove translation
+            if (removeTranslation)
+            {
+                m.SetColumn(3, new Vector4(0, 0, 0, 1)); // remove translation
+            }
+            src.ApplyMatrix(m);
+        }
+
+        public static void ApplyTranslation(this Mesh src, Vector3 p)
+        {
+            var m = Matrix4x4.identity;
+            m.SetColumn(3, new Vector4(p.x, p.y, p.z, 1));
             src.ApplyMatrix(m);
         }
 

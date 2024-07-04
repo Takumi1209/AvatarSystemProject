@@ -21,7 +21,7 @@ namespace CVVTuber.VRM
         {
             NullCheck(target, "target");
         }
-
+        /*
         public override void UpdateValue()
         {
             float value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume)) - 0.5f);
@@ -129,7 +129,7 @@ namespace CVVTuber.VRM
                 target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.O), value);
             }
         }
-
+        */
         public override void LateUpdateValue()
         {
             target.Apply();

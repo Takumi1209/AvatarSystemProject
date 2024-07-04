@@ -67,6 +67,10 @@ namespace CVVTuber.VRM
                     blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), 1.0f);
 
                 }
+                else
+                {
+                    blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), 0.0f);
+                }
                
 
             }

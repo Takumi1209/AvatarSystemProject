@@ -73,7 +73,7 @@ namespace VRM.DevOnly.PackageExporter
             var path = string.Format("{0}/{1}-{2}_{3}.unitypackage",
                 folder,
                 prefix,
-                VRMVersion.VERSION,
+                UniGLTF.PackageVersion.VERSION,
                 GetGitHash(Application.dataPath + "/VRM").Substring(0, 4)
                 ).Replace("\\", "/");
 
@@ -187,6 +187,11 @@ namespace VRM.DevOnly.PackageExporter
 
         public static void CreateUnityPackages(string outputDir)
         {
+            if (!VRMSampleCopy.Validate())
+            {
+                throw new Exception("SampleCopy is not same !");
+            }
+
             {
                 var packages = new[]{
                     // VRM

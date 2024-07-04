@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using VRM;
+using UniVRM10;
 
 namespace CVVTuber.VRM
 {
@@ -37,10 +38,11 @@ namespace CVVTuber.VRM
 
         protected virtual void SetupTarget(VRMMeta meta)
         {
+            
             blendShape = meta.GetComponent<VRMBlendShapeProxy>();
 
             firstPerson = meta.GetComponent<VRMFirstPerson>();
-
+            
             animator = meta.GetComponent<Animator>();
             if (animator != null)
             {

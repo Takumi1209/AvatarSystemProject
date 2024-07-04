@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace VRM
@@ -10,10 +11,9 @@ namespace VRM
     {
         public override string GetGltfMaterialTypeFromUnityShaderName(string shaderName)
         {
-            var name = VRMMaterialExporter.VrmMaterialName(shaderName);
-            if (!string.IsNullOrEmpty(name))
+            if (BuiltInVrmMaterialExporter.SupportedShaderNames.Contains(shaderName))
             {
-                return name;
+                return "VRM0X";
             }
             return base.GetGltfMaterialTypeFromUnityShaderName(shaderName);
         }
@@ -30,7 +30,7 @@ namespace VRM
                 // 
                 // extensions.VRM.materialProperties に記録する
                 // 
-                var prop = UniGLTF.ShaderPropExporter.PreShaderPropExporter.GetPropsForSupportedShader(m.shader.name);
+                var prop = UniGLTF.ShaderPropExporter.PreShaderPropExporter.GetPropsForMToon();
                 foreach (var kv in prop.Properties)
                 {
                     if (kv.ShaderPropertyType == UniGLTF.ShaderPropExporter.ShaderPropertyType.TexEnv)

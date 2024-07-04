@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -16,15 +17,6 @@ namespace VRMShaders
         {
             m_externalMap = externalMaterialMap;
         }
-
-        // TODO: UniVRM 0.x の方に処理を移したい
-        static Dictionary<string, string> s_fallbackShaders = new Dictionary<string, string>
-        {
-            {"VRM/UnlitTexture", "Unlit/Texture"},
-            {"VRM/UnlitTransparent", "Unlit/Transparent"},
-            {"VRM/UnlitCutout", "Unlit/Transparent Cutout"},
-            {"UniGLTF/StandardVColor", UniGLTF.UniUnlit.UniUnlitUtil.ShaderName},
-        };
 
         public struct MaterialLoadInfo
         {
@@ -61,10 +53,7 @@ namespace VRMShaders
                 if (!x.UseExternal)
                 {
                     // 外部の '.asset' からロードしていない
-#if VRM_DEVELOP
-                    // Debug.Log($"Destroy {x.Asset}");
-#endif
-                    UnityObjectDestoyer.DestroyRuntimeOrEditor(x.Asset);
+                    UnityObjectDestroyer.DestroyRuntimeOrEditor(x.Asset);
                 }
             }
         }
@@ -112,24 +101,12 @@ namespace VRMShaders
                 getTexture = (x, y) => Task.FromResult<Texture>(null);
             }
 
-            var shaderName = matDesc.ShaderName;
-            if (String.IsNullOrEmpty(shaderName))
+            if (matDesc.Shader == null)
             {
-                throw new Exception("no shader name");
-            }
-            if (s_fallbackShaders.TryGetValue(shaderName, out string fallback))
-            {
-                Debug.LogWarning($"fallback: {shaderName} => {fallback}");
-                shaderName = fallback;
+                throw new ArgumentNullException(nameof(matDesc.Shader));
             }
 
-            var shader = Shader.Find(shaderName);
-            if (shader == null)
-            {
-                throw new Exception($"shader: {shaderName} not found");
-            }
-
-            material = new Material(shader);
+            material = new Material(matDesc.Shader);
             material.name = matDesc.SubAssetKey.Name;
 
             foreach (var kv in matDesc.TextureSlots)

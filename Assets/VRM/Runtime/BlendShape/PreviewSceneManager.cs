@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.Reflection;
 using System;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+using VRMShaders;
 using UniGLTF;
-
 
 namespace VRM
 {
@@ -56,14 +51,17 @@ namespace VRM
             // HideFlags are special editor-only settings that let you have *secret* GameObjects in a scene, or to tell Unity not to save that temporary GameObject as part of the scene
             foreach (var x in go.transform.Traverse())
             {
-                x.gameObject.hideFlags = HideFlags.None
-                | HideFlags.DontSave
-                //| HideFlags.DontSaveInBuild
-#if VRM_DEVELOP
-#else
-                | HideFlags.HideAndDontSave
-#endif
-                ;
+                if (Symbols.VRM_DEVELOP)
+                {
+                    x.gameObject.hideFlags = HideFlags.None |
+                                             HideFlags.DontSave;
+                }
+                else
+                {
+                    x.gameObject.hideFlags = HideFlags.None |
+                                             HideFlags.DontSave |
+                                             HideFlags.HideAndDontSave;
+                }
             }
 
             return manager;
@@ -247,24 +245,29 @@ namespace VRM
 
                 foreach (var x in bake.MaterialValueBindings)
                 {
-                    MaterialItem item;
-                    if (m_materialMap.TryGetValue(x.MaterialName, out item))
+                    if (m_materialMap.TryGetValue(x.MaterialName, out var item))
                     {
                         //Debug.Log("set material");
-                        PropItem prop;
-                        if (item.PropMap.TryGetValue(x.ValueName, out prop))
+                        if (item.PropMap.TryGetValue(x.ValueName, out _))
                         {
-                            var valueName = x.ValueName;
-                            if (valueName.EndsWith("_ST_S")
-                            || valueName.EndsWith("_ST_T"))
+                            var offsetValue = x.TargetValue - x.BaseValue;
+                            var targetPropName = x.ValueName;
+                            if (x.ValueName.EndsWith("_ST_S"))
                             {
-                                valueName = valueName.Substring(0, valueName.Length - 2);
+                                offsetValue.y = 0;
+                                offsetValue.w = 0;
+                                targetPropName = targetPropName.Substring(0, targetPropName.Length - 2);
+                            }
+                            else if (x.ValueName.EndsWith("_ST_T"))
+                            {
+                                offsetValue.x = 0;
+                                offsetValue.z = 0;
+                                targetPropName = targetPropName.Substring(0, targetPropName.Length - 2);
                             }
 
-                            var value = item.Material.GetVector(valueName);
-                            //Debug.LogFormat("{0} => {1}", valueName, x.TargetValue);
-                            value += ((x.TargetValue - x.BaseValue) * bake.Weight);
-                            item.Material.SetColor(valueName, value);
+                            var value = item.Material.GetVector(targetPropName);
+                            value += offsetValue * bake.Weight;
+                            item.Material.SetColor(targetPropName, value);
                         }
                     }
                 }
