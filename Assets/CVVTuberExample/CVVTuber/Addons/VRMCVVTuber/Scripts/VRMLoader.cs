@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using VRM;
 using UniVRM10;
+using UniGLTF.Extensions.VRMC_vrm;
+
 
 namespace CVVTuber.VRM
 {
@@ -40,7 +42,7 @@ namespace CVVTuber.VRM
         {
             
             blendShape = meta.GetComponent<VRMBlendShapeProxy>();
-
+           
             firstPerson = meta.GetComponent<VRMFirstPerson>();
             
             animator = meta.GetComponent<Animator>();
