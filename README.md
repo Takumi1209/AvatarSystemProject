@@ -1,5 +1,6 @@
 # Zoom Fatigueを軽減させることで、快適なオンラインコミュニケーションを実現するアバタ動作システム
 Zoomが抱えるインターフェースデザインの問題を解決し、利用者にとって快適なオンラインコミュニケーションを実現する。
+
 <img width="250" alt="image" src="https://github.com/Takumi1209/AvatarSystemProject/assets/87661689/77c39998-b404-4993-9f50-6ee3dd0e819f">
 
 
