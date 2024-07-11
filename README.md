@@ -10,6 +10,7 @@ Zoomが抱えるインターフェースデザインの問題を解決し、利�
 - Dlib FaceLandmark Detector
 - VRM, UniVRM
 - UnityCapture
+- StandaloneFileBrowser
 
 ## 背景
 COVID-19の流行により、Web会議サービス「Zoom」の導入が急増しました。それに伴い、Zoomの使用によって引き起こされる「Zoom Fatigue」が問題視されています。Bailenson氏は、現在のZoomインターフェースデザインの様々な側面が心理的負荷に影響を与える可能性が高いことを示しました【Bailenson, 2021】。この問題を解決し、Web会議参加者にとって快適なオンラインコミュニケーションを実現する必要があります。
