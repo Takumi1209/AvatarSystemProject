@@ -52,6 +52,7 @@ namespace VRM
                         if (_target != null)
                         {
                             target = _target.GetComponent<SkinnedMeshRenderer>();
+                           
                         }
                         if (target != null)
                         {

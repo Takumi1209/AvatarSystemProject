@@ -4,6 +4,9 @@ using UnityEngine;
 using VRM;
 using UniVRM10;
 using UniGLTF.Extensions.VRMC_vrm;
+using System.IO;
+using VRMShaders;
+
 
 
 namespace CVVTuber.VRM
@@ -12,6 +15,7 @@ namespace CVVTuber.VRM
     {
         public VRMMeta meta;
 
+      
         [Space(10)]
 
         public LookTarget faceCamera;
@@ -28,6 +32,11 @@ namespace CVVTuber.VRM
 
         public virtual bool isError { get; protected set; }
 
+        void Start()
+        {
+            
+        }
+
         public virtual void LoadMeta(VRMMeta meta)
         {
             SetupTarget(meta);
@@ -40,12 +49,13 @@ namespace CVVTuber.VRM
 
         protected virtual void SetupTarget(VRMMeta meta)
         {
-            
+          
             blendShape = meta.GetComponent<VRMBlendShapeProxy>();
            
             firstPerson = meta.GetComponent<VRMFirstPerson>();
             
             animator = meta.GetComponent<Animator>();
+
             if (animator != null)
             {
                 firstPerson.Setup();

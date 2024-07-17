@@ -10,7 +10,7 @@ using UnityEngine;
 using VRM;
 
 namespace AddonScripts{
-    public class vrmAutoController : VRMLookAtHead
+    public class vrmAutoController : MonoBehaviour
     {
         public VRMBlendShapeProxy blendShapeProxy;
 
@@ -27,21 +27,16 @@ namespace AddonScripts{
         public float BeforeYaw;
         public float BeforePitch;
 
-        private Transform HeadBone;
-
         private Animator anim = null;
 
       
         // Start is called before the first frame update
         void Start()
         {
-            // Ensure VRMLookAtHead is not null
-            if (VRMLookAtHead == null)
-            {
-                VRMLookAtHead = GetComponent<VRMLookAtHead>();
-            }
-
             anim = GetComponent<Animator>();
+            var target = GameObject.Find("Main Camera").transform;
+            VRMLookAtHead.Target = target;
+          
             anim.SetInteger("RandomState", 0);
 
         }
@@ -59,7 +54,7 @@ namespace AddonScripts{
             
          
 
-            // Debug.Log("Yaw: " + Math.Abs(Yaw - BeforeYaw) + " Pitch: " + Math.Abs(Pitch - BeforePitch));
+            Debug.Log("Yaw: " + Math.Abs(Yaw - BeforeYaw) + " Pitch: " + Math.Abs(Pitch - BeforePitch));
 
             if (timeElapsed >= timeOut)
             {
@@ -83,7 +78,7 @@ namespace AddonScripts{
                 }
                 BeforeYaw = Yaw;
                 BeforePitch = Pitch;
-               
+
                 timeElapsed = 0.0f;
             }
 

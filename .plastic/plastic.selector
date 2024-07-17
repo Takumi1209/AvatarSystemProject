@@ -1,0 +1,4 @@
+repository "AvatarSystemProject@takumi1209@cloud"
+  path "/"
+    br "/main"
+    co "/main"

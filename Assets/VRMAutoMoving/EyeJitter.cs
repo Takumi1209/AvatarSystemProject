@@ -11,7 +11,7 @@ public class EyeJitter : MonoBehaviour
 
     public float changeTime = 0.4f; // 変更する時間最小値
     public float changeTimeRange = 2.0f; // 変更する時間幅（乱数）
-    public Vector2 range = new Vector2(0.001f, 0.03f); // 可動範囲
+    public Vector2 range = new Vector2(0.001f, 0.01f); // 可動範囲
 
     public Transform rightEye;   // ex.) 93.!joint_RightEye
     public Transform leftEye;    // ex.) 95.!joint_LeftEye

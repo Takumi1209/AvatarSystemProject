@@ -54,7 +54,7 @@ public class UnityCapture : MonoBehaviour
 
         if (Application.runInBackground == false)
         {
-            Debug.LogWarning("Application.runInBackground switched to enabled for capture streaming");
+            //Debug.LogWarning("Application.runInBackground switched to enabled for capture streaming");
             Application.runInBackground = true;
         }
     }
@@ -75,8 +75,8 @@ public class UnityCapture : MonoBehaviour
         switch (CaptureInterface.SendTexture(source, Timeout, DoubleBuffering, ResizeMode, MirrorMode))
         {
             case ECaptureSendResult.SUCCESS: break;
-            case ECaptureSendResult.WARNING_FRAMESKIP:               if (!HideWarnings) Debug.LogWarning("[UnityCapture] Capture device did skip a frame read, capture frame rate will not match render frame rate."); break;
-            case ECaptureSendResult.WARNING_CAPTUREINACTIVE:         if (!HideWarnings) Debug.LogWarning("[UnityCapture] Capture device is inactive"); break;
+           // case ECaptureSendResult.WARNING_FRAMESKIP:               if (!HideWarnings) Debug.LogWarning("[UnityCapture] Capture device did skip a frame read, capture frame rate will not match render frame rate."); break;
+            //case ECaptureSendResult.WARNING_CAPTUREINACTIVE:         if (!HideWarnings) Debug.LogWarning("[UnityCapture] Capture device is inactive"); break;
             case ECaptureSendResult.ERROR_UNSUPPORTEDGRAPHICSDEVICE: Debug.LogError("[UnityCapture] Unsupported graphics device (only D3D11 supported)"); break;
             case ECaptureSendResult.ERROR_PARAMETER:                 Debug.LogError("[UnityCapture] Input parameter error"); break;
             case ECaptureSendResult.ERROR_TOOLARGERESOLUTION:        Debug.LogError("[UnityCapture] Render resolution is too large to send to capture device"); break;

@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 using UniGLTF;
 using Unity.VisualScripting;
 using UnityEngine;
+using UniVRM10;
 using VRM;
 using VRMShaders;
 
 public class VRMImporter : MonoBehaviour
 {
+    // string initialPath =　"Assets/Zundamon/Zundamon_human_vrm.vrm" ;
+
     [SerializeField] private RuntimeAnimatorController vrmAnimatorController;
 
-    private VRMLoader vrmLoader;
 
     public GameObject Player;
 
@@ -24,11 +26,6 @@ public class VRMImporter : MonoBehaviour
         new ExtensionFilter("VRM Files", "vrm", "VRM"),
     };
 
-    void Start()
-    {
-        Player = GameObject.Find("VRMAvatar");
-    }
-
     // ButtonコンポーネントとOn Click()にセットして利用することを想定
     public void LaodVRM()
     {
@@ -37,40 +34,40 @@ public class VRMImporter : MonoBehaviour
         string path = paths[0];
 
         // すでに開かれているVRMファイルがある場合は削除する。
-        GameObject currentVrm = Player;
+        GameObject currentVrm = GameObject.Find("VRM");
 
         if (currentVrm != null)
         {
             Destroy(currentVrm);
         }
       
-        LoadAsync(path);
+       // LoadAsync(path);
     
     }
 
    
-    public async Task<GameObject> LoadAsync(string path)
+    private async Task<GameObject> LoadAsync(string path)
     {
         var instance = await VrmUtility.LoadAsync(path, new RuntimeOnlyAwaitCaller());
-        instance.Root.name = "VRMAvatar";
 
         SetAnimatorController();
         // SetVRMMeta();
-
         var meta = instance.Root.GetComponent<VRMMeta>();
 
         // SkinnedMeshRenderer に対する指示
         instance.EnableUpdateWhenOffscreen();
         // 準備ができたら表示する(デフォルトでは非表示)
         instance.ShowMeshes();
-        vrmLoader.meta = meta;
-   
+
+       // vrmLoader = GetComponent<VRMLoader>();
+       // vrmLoader.LoadMeta(meta);
+      
         return instance.Root;
     }
 
     private void SetAnimatorController()
     {
-        GameObject vrm1 = GameObject.Find("VRMAvatar");
+        GameObject vrm1 = GameObject.Find("VRM");
         Animator vrm1Animator = vrm1.GetComponent<Animator>();
         vrm1Animator.runtimeAnimatorController = vrmAnimatorController;
     }
@@ -78,9 +75,9 @@ public class VRMImporter : MonoBehaviour
     private void SetVRMMeta()
     {
 
-        GameObject vrm = Player;
+        GameObject vrm = GameObject.Find("VRM");
         VRMMeta vrmMeta = vrm.GetComponent<VRMMeta>();
-        vrmLoader.LoadMeta(vrmMeta);
+        //vrmLoader.LoadMeta(vrmMeta);
 
     }
 }

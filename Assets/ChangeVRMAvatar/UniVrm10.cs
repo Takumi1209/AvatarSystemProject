@@ -54,7 +54,7 @@ public class UniVrm10 : MonoBehaviour
         {
             Destroy(currentVrm);
         }
-        OpenVRM(paths);
+       // OpenVRM(paths);
         // LoadAsync(path);
 
        // SetAnimatorController();
