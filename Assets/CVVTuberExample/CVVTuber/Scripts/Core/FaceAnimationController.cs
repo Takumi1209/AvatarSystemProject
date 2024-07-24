@@ -37,7 +37,7 @@ namespace CVVTuber
 
         public bool enableMouth;
 
-        public bool enableNoseAndJaw;
+        public bool enableQuestion;
 
         public bool enableNod;
 
@@ -59,12 +59,15 @@ namespace CVVTuber
         public float MouthSizeParam = 0;
 
         [Range(0, 1)]
+        [HideInInspector]
         public float browLeapT = 0.4f;
 
         [Range(0, 1)]
+        [HideInInspector]
         public float eyeLeapT = 0.4f;
 
         [Range(0, 1)]
+        [HideInInspector]
         public float mouthLeapT = 0.3f;
 
         protected List<Vector2> oldPoints;

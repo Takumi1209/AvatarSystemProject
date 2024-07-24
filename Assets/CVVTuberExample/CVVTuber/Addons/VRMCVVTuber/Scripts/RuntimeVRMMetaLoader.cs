@@ -1,25 +1,17 @@
-using SFB;
-using System;
-using System.Collections;
-using System.Windows.Forms;
-using UnityEngine;
-using VRM;
-using VRMShaders;
-using UnityEngine.UI;
 using AddonScripts;
 using Mebiustos.BreathController;
-using UniGLTF.Extensions.VRMC_vrm;
-using UniHumanoid;
-
+using System;
+using System.Collections;
+using UnityEngine;
+using VRM;
 
 namespace CVVTuber.VRM
 {
     public class RuntimeVRMMetaLoader : MonoBehaviour
     {
-        [Tooltip("A filename for runtime loading from StreamingAssets folder. (e.g. \"VRM/Zundamon_human_vrm.vrm\")")]
+        [Tooltip("Set the VRM file path, relative to the starting point of the \"StreamingAssets\" folder, or absolute path.")]
         public string vrmFilePath = "VRM/Zundamon_human_vrm.vrm";
-
-        public UnityEngine.UI.Button LoadVRMButton;
+       
 
         [Space(5)]
 
@@ -46,10 +38,18 @@ namespace CVVTuber.VRM
 
         public virtual IEnumerator LoadVRMMetaAsync()
         {
-            yield return OpenCVForUnity.UnityUtils.Utils.getFilePathAsync(vrmFilePath, (result) =>
+            Uri uri;
+            if (Uri.TryCreate(vrmFilePath, UriKind.Absolute, out uri))
             {
-                ImportVRMAsync(result);
-            });
+                ImportVRMAsync(uri.OriginalString);
+            }
+            else
+            {
+                yield return OpenCVForUnity.UnityUtils.Utils.getFilePathAsync(vrmFilePath, (result) =>
+                {
+                    ImportVRMAsync(result);
+                });
+            }
 
             while (!isDone)
             {
@@ -78,11 +78,12 @@ namespace CVVTuber.VRM
             else
             {
                 var metaObject = meta.Meta;
-               // Debug.LogFormat("meta: title:{0}", metaObject.Title);
-               // Debug.LogFormat("meta: version:{0}", metaObject.Version);
-               // Debug.LogFormat("meta: author:{0}", metaObject.Author);
-               // Debug.LogFormat("meta: exporterVersion:{0}", metaObject.ExporterVersion);
-
+                /*
+                Debug.LogFormat("meta: title:{0}", metaObject.Title);
+                Debug.LogFormat("meta: version:{0}", metaObject.Version);
+                Debug.LogFormat("meta: author:{0}", metaObject.Author);
+                Debug.LogFormat("meta: exporterVersion:{0}", metaObject.ExporterVersion);
+                */
                 isDone = true;
             }
 
@@ -103,61 +104,8 @@ namespace CVVTuber.VRM
             vrmautoController.VRMLookAtHead = vrmLookAtHead;
 
             m_model.AddComponent<BreathController>();
-        }
-
-        void Update()
-        {
-          
-        }
-
-        ///////////
-        // Interrupt process to set Meta of VRM loaded at runtime to VRMLoader before Start of VRMCVVTuberControllManager is done.
-        IEnumerator Start()
-        {
-            var runtimeVrmMetaLoader = GetComponent<RuntimeVRMMetaLoader>();
-            if (runtimeVrmMetaLoader != null)
-            {
-                yield return runtimeVrmMetaLoader.LoadVRMMetaAsync();
-
-                var vrmLoader = GetComponent<VRMLoader>();
-                if (vrmLoader != null)
-                {
-                    vrmLoader.meta = runtimeVrmMetaLoader.GetMeta();
-                }
-            }
-
-            if (LoadVRMButton != null)
-            {
-                LoadVRMButton.onClick.AddListener(LaodVRM);
-            }
-        }
-       
-
-       
-
-        ExtensionFilter[] extensions = new[] {
-        new ExtensionFilter("VRM Files", "vrm", "VRM"),
-        };
-
-        public void LaodVRM()
-        {
-            string[] paths = StandaloneFileBrowser.OpenFilePanel("Load VRM File", "", extensions, true);
-            // Vrm10Instance vrm10Instance = await Vrm10.LoadPathAsync(paths[0]);
-            string path = paths[0];
-
-            // すでに開かれているVRMファイルがある場合は削除する。
-            GameObject currentVrm = GameObject.Find("VRM");
-
-            if (currentVrm != null)
-            {
-                Destroy(currentVrm);
-            }
-
-            ImportVRMAsync(path);
 
         }
-
-
 
     }
 }

@@ -11,7 +11,7 @@ public class EmotionalToggleController : MonoBehaviour
     void Start()
     {
         // トグルの初期状態を設定
-        EmotionalToggle.isOn = faceAnimationController.enableNoseAndJaw;
+        EmotionalToggle.isOn = faceAnimationController.enableQuestion;
 
         // トグルの値が変更されたときに呼び出されるリスナーを追加
         EmotionalToggle.onValueChanged.AddListener(OnToggleValueChanged);

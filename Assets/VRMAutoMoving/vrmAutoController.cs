@@ -54,7 +54,7 @@ namespace AddonScripts{
             
          
 
-            Debug.Log("Yaw: " + Math.Abs(Yaw - BeforeYaw) + " Pitch: " + Math.Abs(Pitch - BeforePitch));
+           // Debug.Log("Yaw: " + Math.Abs(Yaw - BeforeYaw) + " Pitch: " + Math.Abs(Pitch - BeforePitch));
 
             if (timeElapsed >= timeOut)
             {

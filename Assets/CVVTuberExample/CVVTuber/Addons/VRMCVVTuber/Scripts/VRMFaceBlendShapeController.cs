@@ -52,13 +52,13 @@ namespace CVVTuber.VRM
         public float browHightVal = 0.85f;
         public float jawAngleVal = 65.0f;
         public float smileVal = 0.3f;
- 
-        
+
+
 
         protected override void UpdateFaceAnimation(List<Vector2> points)
-        { 
+        {
 
-            if (enableNoseAndJaw)
+            if (enableQuestion)
             {
                 float jawangle = angleTilt(points);
                 if (jawangle > jawAngleVal + 50.0f || jawangle < jawAngleVal)
@@ -71,7 +71,7 @@ namespace CVVTuber.VRM
                 {
                     blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), 0.0f);
                 }
-               
+
 
             }
 
@@ -94,13 +94,13 @@ namespace CVVTuber.VRM
                 blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Star), BrowParam);
 
             }
-            
-            
+
+
             if (enableEye)
             {
                 float eyeOpen = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2.0f;
                 //Debug.Log("eyeOpen " + eyeOpen);
-               
+
 
                 if (eyeOpen >= 0.2f)
                 {
@@ -166,20 +166,20 @@ namespace CVVTuber.VRM
                 // Debug.Log("mouthWidth " + mouthRatio);
                 float EyeRatio = (GetLeftEyeOpenRatio(points) + GetRightEyeOpenRatio(points)) / 2;
                 // Debug.Log("EyeRatio " + EyeRatio);
-               
-                
-                
+
+
+
             }
 
-         //   if (enableNod)
-         //   {
-         //       float nod = NodDitect(points);
-         //     Debug.Log("nod " + nod);
-         //       if (nod < 89.5f)
-         //       {
-         //           blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), 1.0f);
-         //       }
-         //   }
+            //   if (enableNod)
+            //   {
+            //       float nod = NodDitect(points);
+            //     Debug.Log("nod " + nod);
+            //       if (nod < 89.5f)
+            //       {
+            //           blendShapeProxy.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), 1.0f);
+            //       }
+            //   }
 
         }
 

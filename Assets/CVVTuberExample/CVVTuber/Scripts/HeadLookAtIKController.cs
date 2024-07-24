@@ -40,7 +40,7 @@ namespace CVVTuber
         public bool leapAngle;
 
         [Range(0, 1)]
-        public float leapT = 0.2f;
+        private float leapT = 0.2f;
 
         [Header("[Target]")]
 
@@ -82,6 +82,10 @@ namespace CVVTuber
                 {
                     NullWarning("lookAtTarget");
                 }
+
+                ////
+                enabled = true;
+                ////
             }
             else
             {

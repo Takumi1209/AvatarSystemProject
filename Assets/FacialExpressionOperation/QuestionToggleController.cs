@@ -11,7 +11,7 @@ public class QuestionToggleController : MonoBehaviour
     void Start()
     {
         // トグルの初期状態を設定
-        QuestionToggle.isOn = faceAnimationController.enableNoseAndJaw;
+        QuestionToggle.isOn = faceAnimationController.enableQuestion;
 
         // トグルの値が変更されたときに呼び出されるリスナーを追加
         QuestionToggle.onValueChanged.AddListener(OnToggleValueChanged);
@@ -20,6 +20,6 @@ public class QuestionToggleController : MonoBehaviour
     // トグルの値が変更されたときに呼び出されるメソッド
     void OnToggleValueChanged(bool isOn)
     {
-        faceAnimationController.enableNoseAndJaw = isOn;
+        faceAnimationController.enableQuestion = isOn;
     }
 }

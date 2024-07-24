@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using VRM;
 
 namespace CVVTuber.VRM
 {
@@ -118,5 +119,85 @@ namespace CVVTuber.VRM
                 coroutine = null;
             }
         }
+
+        ///////
+        public void changeVRM(VRMMeta meta)
+        {
+            enabled = false;
+
+            vrmLoader = GetComponent<VRMLoader>();
+            if (vrmLoader != null)
+            {
+                if (vrmLoader.meta != null)
+                {
+                    GameObject.Destroy(vrmLoader.meta.gameObject);
+                }
+
+                vrmLoader.meta = meta;
+
+                if (vrmLoader.meta != null)
+                {
+                    vrmLoader.LoadMeta(vrmLoader.meta);
+                }
+                else
+                {
+                    Debug.LogWarning("vrmLoader.meta is null.");
+                }
+            }
+
+            if (vrmLoader != null && (vrmLoader.isError || vrmLoader.meta == null))
+                return;
+            
+            if (animatorController != null)
+            {
+                if (vrmLoader.animator != null && vrmLoader.animator.runtimeAnimatorController == null)
+                    vrmLoader.animator.runtimeAnimatorController = (RuntimeAnimatorController)animatorController;
+            }
+
+            foreach (var item in processOrderList)
+            {
+                if (item == null)
+                    continue;
+
+                //Debug.Log("Setup : "+item.gameObject.name);
+
+                if (item is HeadRotationController)
+                {
+                    if (vrmLoader.lookAtHead != null)
+                        ((HeadRotationController)item).target = vrmLoader.lookAtHead.Head;
+                }
+                if (item is HeadLookAtIKController)
+                {
+                    if (vrmLoader.animator != null)
+                        ((HeadLookAtIKController)item).target = vrmLoader.animator;
+
+                    var lookAtLoot = GameObject.Find("LookAtRoot").transform;
+                    if (lookAtLoot != null)
+                    {
+                        ((HeadLookAtIKController)item).lookAtRoot = lookAtLoot;
+                        var lookAtTarget = lookAtLoot.transform.Find("LookAtTarget").transform;
+                        if (lookAtTarget != null)
+                        {
+                            ((HeadLookAtIKController)item).lookAtTarget = lookAtTarget;
+                        }
+                    }
+                }
+                if (item is VRMFaceBlendShapeController)
+                {
+                    if (vrmLoader.blendShape != null)
+                        ((VRMFaceBlendShapeController)item).blendShapeProxy = vrmLoader.blendShape;
+                }
+                if (item is VRMKeyInputFaceBlendShapeController)
+                {
+                    if (vrmLoader.blendShape != null)
+                        ((VRMKeyInputFaceBlendShapeController)item).target = vrmLoader.blendShape;
+                }
+
+               item.Setup();
+            }
+            
+            enabled = true;
+        }
+        ///////
     }
 }

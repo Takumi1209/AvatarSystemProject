@@ -21,20 +21,19 @@ namespace CVVTuber.VRM
         {
             NullCheck(target, "target");
         }
-        /*
+
         public override void UpdateValue()
         {
-            float value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume)) - 0.5f);
-            target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), value);
-            value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Star)) - 0.5f);
-            target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Star), value);
+            float value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun)) - 0.5f);
+            target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), value);
+            value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Angry)) - 0.5f);
+            target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Angry), value);
             value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy)) - 0.5f);
             target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Joy), value);
-            value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Tear)) - 0.5f);
-            target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Tear), value);
-            value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hauu)) - 0.5f);
-            target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hauu), value);
+            value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Sorrow)) - 0.5f);
+            target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Sorrow), value);
 
+            /*
             value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.LookUp)) - 0.5f);
             target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.LookUp), value);
             value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.LookDown)) - 0.5f);
@@ -54,16 +53,17 @@ namespace CVVTuber.VRM
             target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.E), value);
             value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.O)) - 0.5f);
             target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.O), value);
+            */
 
             if (Input.GetKey(KeyCode.Z))
             {
-                value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume)) + 1.0f);
-                target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hachume), value);
+                value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun)) + 1.0f);
+                target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Fun), value);
             }
             if (Input.GetKey(KeyCode.X))
             {
-                value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Star)) + 1.0f);
-                target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Star), value);
+                value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Angry)) + 1.0f);
+                target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Angry), value);
             }
             if (Input.GetKey(KeyCode.C))
             {
@@ -72,16 +72,11 @@ namespace CVVTuber.VRM
             }
             if (Input.GetKey(KeyCode.V))
             {
-                value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Tear)) + 1.0f);
-                target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Tear), value);
-            }
-            if (Input.GetKey(KeyCode.B))
-            {
-                value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hauu)) + 1.0f);
-                target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Hauu), value);
+                value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Sorrow)) + 1.0f);
+                target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.Sorrow), value);
             }
 
-
+            /*
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.LookUp)) + 1.0f);
@@ -128,8 +123,9 @@ namespace CVVTuber.VRM
                 value = Mathf.Clamp01(target.GetValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.O)) + 1.0f);
                 target.AccumulateValue(BlendShapeKey.CreateFromPreset(BlendShapePreset.O), value);
             }
+            */
         }
-        */
+
         public override void LateUpdateValue()
         {
             target.Apply();

@@ -11,7 +11,7 @@ public class SmileToggleController : MonoBehaviour
     void Start()
     {
         // トグルの初期状態を設定
-        SmileToggle.isOn = faceAnimationController.enableNoseAndJaw;
+        SmileToggle.isOn = faceAnimationController.enableQuestion;
 
         // トグルの値が変更されたときに呼び出されるリスナーを追加
         SmileToggle.onValueChanged.AddListener(OnToggleValueChanged);

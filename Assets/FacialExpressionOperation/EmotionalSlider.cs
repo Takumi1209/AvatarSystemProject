@@ -14,15 +14,20 @@ public class EmotionalSlider : MonoBehaviour
     {
         emotionalSlider = GetComponent<Slider>(); // Sliderコンポーネントを取得
         emotionalSlider.value = vrmFaceBlendShapeController.browHightVal;
-
-        emotionalSlider.onValueChanged.AddListener(OnSliderValueChanged); // スライダーの値が変更されたときに呼び出されるリスナーを追加
+    }
+    void Update()
+    {
+        if (vrmFaceBlendShapeController.blendShapeProxy != null)
+        {
+            emotionalSlider.onValueChanged.AddListener(OnSliderValueChanged); // スライダーの値が変更されたときに呼び出されるリスナーを追加
+        }
     }
 
     // スライダーの値が変更されたときに呼び出されるメソッド
     void OnSliderValueChanged(float value)
     {
         vrmFaceBlendShapeController.browHightVal = value;
-    }
-    // Update is called once per frame
+        // Update is called once per frame
 
+    }
 }

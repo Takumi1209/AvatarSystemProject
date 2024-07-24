@@ -85,7 +85,7 @@ namespace CVVTuberExample
 
         public void OnVRMCVVTuberExampleButtonClick()
         {
-            SceneManager.LoadScene("VRMCVVTuberExample");
+            SceneManager.LoadScene("VRMCVVTuberExample_RuntimeVRMTest");
         }
 
 

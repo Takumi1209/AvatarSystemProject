@@ -40,8 +40,7 @@ namespace CVVTuber
         public bool leapAngle;
 
         [Range(0, 1)]
-        [HideInInspector]
-        public float leapT = 0.1f;
+        private float leapT = 0.2f;
 
         [Header("[Target]")]
 
